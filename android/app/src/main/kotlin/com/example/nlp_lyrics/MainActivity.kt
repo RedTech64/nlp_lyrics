@@ -1,4 +1,4 @@
-package com.example.nlp_lyrics
+package com.redtech.nlp_lyrics
 
 import io.flutter.embedding.android.FlutterActivity
 
