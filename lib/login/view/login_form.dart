@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:nlp_lyrics/login/login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+
+import '../cubit/login_cubit.dart';
 
 class LoginForm extends StatelessWidget {
   @override
@@ -26,6 +31,9 @@ class LoginForm extends StatelessWidget {
               const SizedBox(height: 16.0),
               _GoogleLoginButton(),
               const SizedBox(height: 4.0),
+              if (Platform.isIOS)
+                _AppleLoginButton(),
+              const SizedBox(height: 4.0),
             ],
           ),
         ),
@@ -47,6 +55,15 @@ class _GoogleLoginButton extends StatelessWidget {
       icon: const Icon(FontAwesomeIcons.google, color: Colors.white),
       color: theme.accentColor,
       onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
+    );
+  }
+}
+
+class _AppleLoginButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SignInWithAppleButton(
+      onPressed: () => context.read<LoginCubit>().logInWithApple(Platform()),
     );
   }
 }
